@@ -1,5 +1,5 @@
-import {Schema, model} from 'mongoose'
-import {Gateway} from '../types'
+import { Schema, model } from 'mongoose';
+import { Gateway } from '../types';
 import net from 'net';
 
 const GatewaySchema = new Schema<Gateway>(
@@ -19,7 +19,7 @@ const GatewaySchema = new Schema<Gateway>(
       unique: true,
       validate: {
         validator: function (value: string) {
-          return net.isIPv4(value)
+          return net.isIPv4(value);
         },
         message: 'Invalid IPv4 address.',
       },
@@ -33,8 +33,8 @@ const GatewaySchema = new Schema<Gateway>(
   },
   {
     timestamps: true,
-  },
-)
+  }
+);
 
-const Gateway = model('Gateway', GatewaySchema)
-export default Gateway
+const GatewayModel = model('Gateway', GatewaySchema);
+export default GatewayModel;

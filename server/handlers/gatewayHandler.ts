@@ -1,5 +1,6 @@
-import createHttpError from 'http-errors'
-import Gateway from '../models/Gateway'
+import createHttpError from 'http-errors';
+import GatewayModel from '../models/Gateway';
+import net from 'net';
 import {
   ExpressHandler,
   ExpressParamHandler,
@@ -13,71 +14,97 @@ import {
   UpdateGatwayRes,
   DeleteGatwayReq,
   DeleteGatwayRes,
-} from './apiTypes'
+} from './apiTypes';
 
-export const getGateways: ExpressHandler<GatewaysReq, GatewaysRes> = async (
-  req,
-  res,
-) => {
-  const gateways = await Gateway.find()
-  res.status(200).json({data: gateways})
-}
+export const getGateways: ExpressHandler<GatewaysReq, GatewaysRes> = async (req, res) => {
+  const gateways = await GatewayModel.find();
+  res.status(200).json({ data: gateways });
+};
 
-export const addGateway: ExpressHandler<AddGatwayReq, AddGatewayRes> = async (
-  req,
-  res,
-  next,
-) => {
-  const {serial, name, ip} = req.body
+export const addGateway: ExpressHandler<AddGatwayReq, AddGatewayRes> = async (req, res, next) => {
+  const { serial, name, ip } = req.body;
   if (!serial || !name || !ip) {
-    return next(createHttpError(401, 'All fields is required'))
+    return next(createHttpError(400, 'All fields is required'));
   }
-
-  const gateway = new Gateway({
-    serial: serial,
-    name: name,
-    ip: ip,
-  })
-  await gateway.save()
-  res.status(201).json({data: gateway})
-}
-export const getGateway: ExpressParamHandler<
-  {id: string},
-  GetGatwayReq,
-  GetGatwayRes
-> = async (req, res, next) => {
-  const id = req.params.id
-  const gateway = await Gateway.findById(id).populate('peripherals')
-  if (!gateway) {
-    return next(createHttpError(404, 'this gateway is not exist'))
+  try {
+    const gateway = new GatewayModel({
+      serial: serial,
+      name: name,
+      ip: ip,
+    });
+    await gateway.save();
+    res.status(201).json({ data: gateway });
+  } catch (err: any) {
+    if (err.code === 11000) {
+      return next(createHttpError(400, 'Serial already exist try another one'));
+    }
+    if (err.errors.ip) {
+      return next(createHttpError(400, err.errors.ip.message));
+    }
+    return next(createHttpError(500, 'Something went wrong'));
   }
-  res.status(201).json({data: gateway})
-}
+};
+export const getGateway: ExpressParamHandler<{ id: string }, GetGatwayReq, GetGatwayRes> = async (
+  req,
+  res,
+  next
+) => {
+  const id = req.params.id;
+  try {
+    const gateway = await GatewayModel.findById(id).populate('peripherals');
+    if (!gateway) throw new Error('The gateway not exist');
+    res.status(201).json({ data: gateway });
+  } catch (err: any) {
+    if (err.name === 'CastError') {
+      return next(createHttpError(400, 'The Gateway not exist'));
+    }
+    return next(createHttpError(500, 'Something went wrong'));
+  }
+};
 
 export const updateGateway: ExpressParamHandler<
-  {id: string},
+  { id: string },
   UpdateGatwayReq,
   UpdateGatwayRes
 > = async (req, res, next) => {
-  const id = req.params.id
-  const gateway = await Gateway.findByIdAndUpdate(id, req.body, {
-    new: true,
-  })
-  if (!gateway) {
-    return next(createHttpError(404, 'this gateway is not exist'))
+  const id = req.params.id;
+  const { serial, name, ip } = req.body;
+  if (!serial || !name || !ip) {
+    return next(createHttpError(400, 'The fields not allow to be undefined'));
   }
-  res.status(201).json({data: gateway})
-}
+  if (serial === ' ' || name === ' ') {
+    return next(createHttpError(400, 'The fields not allow to be empty'));
+  }
+  if (!net.isIPv4(ip)) {
+    return next(createHttpError(400, 'Invalid IPv4 address'));
+  }
+  try {
+    const gateway = await GatewayModel.findByIdAndUpdate(id, req.body, {
+      new: true,
+    });
+    if (!gateway) throw new Error('The gateway not exist');
+    res.status(201).json({ data: gateway });
+  } catch (err: any) {
+    if (err.code === 11000) {
+      return next(createHttpError(400, 'Serial already exist try another one'));
+    }
+    return next(createHttpError(500, 'Something went wrong'));
+  }
+};
 
 export const deleteGateway: ExpressParamHandler<
-  {id: string},
+  { id: string },
   DeleteGatwayReq,
   DeleteGatwayRes
 > = async (req, res, next) => {
-  const id = req.params.id
-  const gateway = await Gateway.findByIdAndDelete(id)
-  if (!gateway) {
-    return next(createHttpError(404, 'this gateway is not exist'))
+  const id = req.params.id;
+  try {
+    await GatewayModel.findByIdAndDelete(id);
+    res.status(201).json({ message: 'success' });
+  } catch (err: any) {
+    if (err.name === 'CastError') {
+      return next(createHttpError(400, 'The Gateway not exist'));
+    }
+    return next(createHttpError(500, 'Something went wrong'));
   }
-  res.status(201).json({message: 'success'})
-}
+};

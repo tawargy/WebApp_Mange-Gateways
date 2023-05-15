@@ -1,5 +1,5 @@
-import {Schema,model} from 'mongoose'
-import {Peripheral} from '../types'
+import { Schema, model } from 'mongoose';
+import { Peripheral } from '../types';
 
 const PeripheralSchema = new Schema<Peripheral>(
   {
@@ -16,8 +16,8 @@ const PeripheralSchema = new Schema<Peripheral>(
       type: String,
       required: true,
       validate: {
-        validator: function (value:string) {
-          return value === 'online' || value === 'offline'
+        validator: function (value: string) {
+          return value === 'online' || value === 'offline';
         },
         message: 'Status must be `online` or `offline`.',
       },
@@ -29,8 +29,8 @@ const PeripheralSchema = new Schema<Peripheral>(
   },
   {
     timestamps: true,
-  },
-)
+  }
+);
 
-const Peripheral = model('Peripheral', PeripheralSchema)
-export default Peripheral
+const PeripheralModel = model('Peripheral', PeripheralSchema);
+export default PeripheralModel;
