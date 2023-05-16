@@ -1,3 +1,4 @@
+import cors from 'cors'
 import express, { RequestHandler, ErrorRequestHandler } from 'express';
 import {
   getGateways,
@@ -18,7 +19,7 @@ import createError from 'http-errors';
 
 const app: express.Application = express();
 app.use(express.json());
-
+app.use(cors())
 const logger: RequestHandler = (req, res, next) => {
   console.log('Headers', req.headers);
   console.log('Body', req.body);
