@@ -4,7 +4,7 @@ import mongoose from 'mongoose';
 import app from './app';
 
 const PORT = process.env.PORT || 5000;
-const DB = process.env.DB_URL;
+const DB = 'mongodb://mongoDB:27017/gateways';
 
 if (DB) {
   mongoose
