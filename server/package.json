@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon --exec ts-node --files src/server.ts",
-    "build": "cd src && tsc",
+    "start:prod": "node build/server.js",
+    "build":"tsc",
     "debug": "ndb server.ts",
     "test": "jest"
   },
