@@ -1,0 +1,48 @@
+.peripherals{
+  position:relative;
+  margin-top:1rem;
+}
+.btnAddMain{
+  position:absolute;
+  right:0;
+  top:0;
+  font-size:1rem;
+  color:#50C878;
+  border:none;
+  padding:.5rem;
+  
+  
+}
+
+.form {
+  margin-top:1rem;
+    
+  padding: 2rem;
+  display: flex;
+  justify-content:space-around;
+
+}
+.formGroup label{
+  padding:.3rem;
+  color:#868B8E
+}
+.formGroup input{
+  padding:.3rem;
+  border-radius:.3rem;
+  border:none;
+  font-size:1rem
+  
+}
+.btnAdd {
+  display: block;
+  padding: 1rem;
+  margin: auto;
+  width: 30%;
+  background-color: #79c7c5;
+  color: #fff;
+  font-size: 1.3rem;
+  border-radius: 0.4rem;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}

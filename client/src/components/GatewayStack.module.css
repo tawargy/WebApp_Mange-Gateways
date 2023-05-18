@@ -1,0 +1,40 @@
+.gatewayContainer {
+  display: flex;
+  justify-content: space-around;
+}
+.gatewayStack {
+  width: 30%;
+  padding: 10px;
+  border-radius: 0.4rem;
+  -webkit-box-shadow: -5px 0px 37px -7px rgba(0, 0, 0, 0.08);
+  -moz-box-shadow: -5px 0px 37px -7px rgba(0, 0, 0, 0.08);
+  box-shadow: -5px 0px 37px -7px rgba(0, 0, 0, 0.08);
+}
+ .btnAdd {
+  display: inline-block;
+  padding: 1rem;
+  width: 100%;
+  background-color: #79c7c5;
+  color: #fff;
+  font-size: 1.3rem;
+  border-radius: 0.4rem;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+
+.gatewayName {
+  border-radius: 0.3rem;
+  border: 1px solid #99d19c;
+  width: 100%;
+  padding: 10px;
+  margin: 10px auto;
+  display: flex;
+  justify-content: space-between;
+  cursor: pointer;
+}
+
+.gatewayInfo {
+  width: 60%;
+
+}

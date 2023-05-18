@@ -1,0 +1,74 @@
+.peripheralComponent{
+  margin-top:1rem;
+  position:relative
+}
+.peripheralController{
+  position:absolute;
+  top:1.2rem;
+ right:1rem;
+}
+
+.peripheralController .btnEdit{
+color:orange;
+padding:.2rem;
+  font-size:1.4rem;
+  border:none
+}
+.peripheralController .btnDelete{
+  color:red;
+  padding:.2rem;
+  font-size:1.4rem;
+  border:none;
+  margin-left:.4rem;
+}
+.peripheralComponent span{
+  margin:10px
+}
+
+.peripheralView{
+    padding:.5rem;
+  margin-bottom:2rem;
+  display:flex;
+  justify-content:space-between;
+  align-items: center;
+  width:80%;
+  border:1px solid black;
+  
+  
+
+}
+
+
+.form {
+  margin-top:1rem;
+    
+  padding: 2rem;
+  display: flex;
+  justify-content:space-around;
+
+}
+.formGroup label{
+  padding:.3rem;
+  color:#868B8E
+}
+.formGroup input{
+  padding:.3rem;
+  border-radius:.3rem;
+  border:none;
+  font-size:1rem
+  
+}
+
+.peripheralEdit .btnEdit {
+  display: block;
+  padding: 1rem;
+  margin: auto;
+  width: 30%;
+  background-color: #79c7c5;
+  color: #fff;
+  font-size: 1.3rem;
+  border-radius: 0.4rem;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}

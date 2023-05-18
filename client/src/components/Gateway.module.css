@@ -1,0 +1,38 @@
+.containerView{
+  position:relative
+}
+.controller{
+position:absolute;
+  right:1rem;
+  top:0
+}
+.btnEdit {
+color:orange;
+padding:.2rem;
+  font-size:1.4rem;
+  border:none
+  
+}
+.btnDelete {
+  color:red;
+  padding:.2rem;
+  font-size:1.4rem;
+  border:none;
+  margin-left:.4rem;
+}
+.gatewayView{
+  padding:1rem;
+  margin-bottom:2rem;
+  display:flex;
+  justify-content:space-between;
+  align-items: center;
+  width:80%;
+  border:1px solid black
+  
+}
+.gatewayView span{
+  display:inline-block;
+
+    color:#000501
+  
+}

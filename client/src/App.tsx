@@ -1,11 +1,11 @@
 import React, {useState} from 'react'
+import GatewayStack from './components/GatewayStack'
+import'./App.css'
 function App() {
-
-  
-
   return (
-    <div className="App">
-    <h2>Gateway Manger</h2> 
+    <div>
+      <h1>Gateway Manger</h1>
+      <GatewayStack />
     </div>
   )
 }

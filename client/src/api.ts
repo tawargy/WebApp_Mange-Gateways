@@ -66,3 +66,56 @@ export const deleteGatway = async (gId: string): Promise<{} | undefined> => {
 
   return data.data
 }
+
+type peripheralAdd = Pick<PeripheralType,  'uid' | 'vendor' | 'status'|'gatewayId'>
+export const addPeripheral = async (
+  peripheral: peripheralAdd,
+): Promise<PeripheralType | undefined> => {
+  const res = await fetch(`${URL}peripheral`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      uid: peripheral.uid,
+      vendor: peripheral.vendor,
+      status: peripheral.status,
+      gatewayId:peripheral.gatewayId
+      
+    }),
+  })
+  const data = await res.json()
+
+  return data.data
+}
+
+type peripheralUpdate = Pick<PeripheralType, '_id' | 'uid' | 'vendor' | 'status'>
+export const updatePeripheral = async (
+  peripheral: peripheralUpdate,
+): Promise<PeripheralType | undefined> => {
+  const res = await fetch(`${URL}peripheral/${peripheral._id}`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      uid: peripheral.uid,
+      vendor: peripheral.vendor,
+      status: peripheral.status,
+      
+    }),
+  })
+  const data = await res.json()
+
+  return data.data
+}
+
+
+export const deletePeripheral = async (pId: string): Promise<{} | undefined> => {
+  const res = await fetch(`${URL}peripheral/${pId}`, {
+    method: 'DELETE',
+  })
+  const data = await res.json()
+
+  return data.data
+}
