@@ -16,7 +16,6 @@ const GatewaySchema = new Schema<Gateway>(
     ip: {
       type: String,
       required: true,
-      unique: true,
       validate: {
         validator: function (value: string) {
           return net.isIPv4(value);

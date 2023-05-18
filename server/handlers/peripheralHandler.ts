@@ -106,6 +106,7 @@ export const deletePeripheral: ExpressParamHandler<
   DeletePeripheralsRes
 > = async (req, res, next) => {
   const id = req.params.id;
+
   try {
     await PeripheralModel.findByIdAndDelete(id);
     res.status(201).json({ message: 'success' });

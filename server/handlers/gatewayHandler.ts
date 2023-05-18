@@ -35,8 +35,9 @@ export const addGateway: ExpressHandler<AddGatwayReq, AddGatewayRes> = async (re
     await gateway.save();
     res.status(201).json({ data: gateway });
   } catch (err: any) {
+    console.log(err);
     if (err.code === 11000) {
-      return next(createHttpError(400, 'Serial already exist try another one'));
+      return next(createHttpError(400, 'Serial have to be unique '));
     }
     if (err.errors.ip) {
       return next(createHttpError(400, err.errors.ip.message));
@@ -81,12 +82,12 @@ export const updateGateway: ExpressParamHandler<
   try {
     const gateway = await GatewayModel.findByIdAndUpdate(id, req.body, {
       new: true,
-    });
+    }).populate('peripherals');
     if (!gateway) throw new Error('The gateway not exist');
     res.status(201).json({ data: gateway });
   } catch (err: any) {
     if (err.code === 11000) {
-      return next(createHttpError(400, 'Serial already exist try another one'));
+      return next(createHttpError(400, 'Serial have to be unique'));
     }
     return next(createHttpError(500, 'Something went wrong'));
   }
