@@ -108,7 +108,9 @@ export const deletePeripheral: ExpressParamHandler<
   const id = req.params.id;
 
   try {
+    await deletePeripheralFromGateway(id);
     await PeripheralModel.findByIdAndDelete(id);
+
     res.status(201).json({ message: 'success' });
   } catch (err: any) {
     if (err.name === 'CastError') {
@@ -116,4 +118,18 @@ export const deletePeripheral: ExpressParamHandler<
     }
     return next(createHttpError(500, 'Something went wrong'));
   }
+};
+
+const deletePeripheralFromGateway = async (id: string) => {
+  const p = await PeripheralModel.findById(id);
+  console.log(p?.gatewayId);
+  const g = await GatewayModel.updateOne(
+    { _id: p?.gatewayId },
+    {
+      $pull: {
+        peripherals: p?._id,
+      },
+    },
+    { new: true }
+  );
 };

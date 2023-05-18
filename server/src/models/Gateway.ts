@@ -35,5 +35,13 @@ const GatewaySchema = new Schema<Gateway>(
   }
 );
 
+
 const GatewayModel = model('Gateway', GatewaySchema);
 export default GatewayModel;
+
+
+
+
+
+
+
