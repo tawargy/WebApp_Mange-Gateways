@@ -28,7 +28,7 @@ must be possible to add and remove a device from a gateway.
 - Backend: NodeJS + Express + MongoDB REST API (typescript)
 
 ### installation guides
-1-  Clone this repo:  `git@github.com:tawargy/m-gateways.git`
-2-  Move to the cloned directory: `cd m-gateways`
-3-  Run `docker-compose up`
-4-  open  http://localhost
+- 1-  Clone this repo:  `git@github.com:tawargy/m-gateways.git`
+- 2-  Move to the cloned directory: `cd m-gateways`
+- 3-  Run `docker-compose up`
+- 4-  open  http://localhost
