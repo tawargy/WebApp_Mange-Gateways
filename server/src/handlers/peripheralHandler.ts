@@ -15,13 +15,13 @@ import {
 import GatewayModel from '../models/Gateway';
 import { Gateway } from '../types';
 
-export const getPeripherals: ExpressHandler<GetPeripheralsReq, GetPeripheralsRes> = async (
-  req,
-  res
-) => {
-  const pers = await PeripheralModel.find();
-  res.status(200).json({ data: pers });
-};
+// export const getPeripherals: ExpressHandler<GetPeripheralsReq, GetPeripheralsRes> = async (
+//   req,
+//   res
+// ) => {
+//   const pers = await PeripheralModel.find();
+//   res.status(200).json({ data: pers });
+// };
 
 export const addPeripheral: ExpressHandler<AddPeripheralsReq, AddPeripheralsRes> = async (
   req,

@@ -10,7 +10,6 @@ import {
 import {
   addPeripheral,
   deletePeripheral,
-  getPeripherals,
   updatePeripheral,
 } from './handlers/peripheralHandler';
 import { errorHandler } from './utils/ErrorHandler';
@@ -36,7 +35,7 @@ app.get('/gateway/:id', asyncHandler(getGateway));
 app.put('/gateway/:id', asyncHandler(updateGateway));
 app.delete('/gateway/:id', asyncHandler(deleteGateway));
 
-app.get('/peripheral', asyncHandler(getPeripherals));
+//app.get('/peripheral', asyncHandler(getPeripherals));
 app.post('/peripheral', asyncHandler(addPeripheral));
 app.put('/peripheral/:id', asyncHandler(updatePeripheral));
 app.delete('/peripheral/:id', asyncHandler(deletePeripheral));

@@ -69,6 +69,7 @@ export const updateGateway: ExpressParamHandler<
   UpdateGatwayRes
 > = async (req, res, next) => {
   const id = req.params.id;
+
   const { serial, name, ip } = req.body;
   if (!serial || !name || !ip) {
     return next(createHttpError(400, 'The fields not allow to be undefined'));

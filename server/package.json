@@ -6,7 +6,8 @@
   "scripts": {
     "start": "nodemon --exec ts-node --files src/server.ts",
     "build": "cd src && tsc",
-    "debug": "ndb server.ts"
+    "debug": "ndb server.ts",
+    "test": "jest"
   },
   "keywords": [],
   "author": "",
@@ -26,6 +27,12 @@
     "@types/cors": "^2.8.13",
     "@types/express": "^4.17.17",
     "@types/http-errors": "^2.0.1",
-    "nodemon": "^2.0.22"
+    "@types/jest": "^29.5.1",
+    "@types/supertest": "^2.0.12",
+    "jest": "^29.5.0",
+    "mongodb-memory-server": "^8.12.2",
+    "nodemon": "^2.0.22",
+    "supertest": "^6.3.3",
+    "ts-jest": "^29.1.0"
   }
 }
