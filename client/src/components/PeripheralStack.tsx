@@ -42,7 +42,9 @@ const PeripheralStack = (props: PropTypes) => {
       setSatus('')
       setAddMode(false)
     } catch (err) {
-      console.log(err)
+      if (err instanceof Error) {
+        alert(err.message)
+      }
     }
   }
   const deleteFromStack = (id: string) => {

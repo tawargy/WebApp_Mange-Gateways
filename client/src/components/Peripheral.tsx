@@ -1,5 +1,5 @@
-import { useState} from 'react'
-import { PeripheralType} from '../types'
+import {useState} from 'react'
+import {PeripheralType} from '../types'
 import {deletePeripheral, updatePeripheral} from '../api'
 import styles from './Peripheral.module.css'
 
@@ -32,7 +32,9 @@ const Peripheral = (props: PropTypes) => {
       setUid(res.uid)
       setEditMode(false)
     } catch (err) {
-      console.log(err)
+      if (err instanceof Error) {
+        alert(err.message)
+      }
     }
   }
 

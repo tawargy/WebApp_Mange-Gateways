@@ -21,7 +21,9 @@ function GatewayStack() {
 
         setGateways(data)
       } catch (err) {
-        console.log(err)
+        if(err instanceof Error){
+        alert(err.message)
+        }
       }
     }
     setDate()

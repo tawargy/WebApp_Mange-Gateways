@@ -1,4 +1,4 @@
-import  { useState} from 'react'
+import {useState} from 'react'
 import {GatewayType} from '../types'
 import {addGateway, updateGatway} from '../api'
 
@@ -29,7 +29,9 @@ const GatewayInput = (props: ProTypes) => {
       setIp('')
       setName('')
     } catch (err) {
-      console.log(err)
+      if (err instanceof Error) {
+        alert(err.message)
+      }
     }
   }
   const updateHandler = async () => {
@@ -44,7 +46,9 @@ const GatewayInput = (props: ProTypes) => {
       if (!res || !props.updateStack) return
       props.updateStack(res)
     } catch (err) {
-      console.log(err)
+      if (err instanceof Error) {
+        alert(err.message)
+      }
     }
   }
 

@@ -27,7 +27,9 @@ function Gateway(props: ProTypes) {
       props.deleteFromStack(gateway?._id)
       setGateway(null)
     } catch (err) {
-      console.log(err)
+      if (err instanceof Error) {
+        alert(err.message)
+      }
     }
   }
 
