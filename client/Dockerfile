@@ -1,4 +1,4 @@
-FROM node:18 As Production
+FROM node:18 As build
 
 WORKDIR /usr/src/client
 
@@ -11,8 +11,12 @@ RUN npm install
 
 COPY . .
 
+RUN npm run build
 
 
-CMD ["sh", "-c", "npm run start"]  
+
+FROM nginx
+
+COPY --from=build /usr/src/client/build /usr/share/nginx/html 
 
 
