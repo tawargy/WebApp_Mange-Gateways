@@ -1,8 +1,7 @@
-import React, {useEffect, useState} from 'react'
-import {GatewayType, PeripheralType} from '../types'
-import {addGateway, updateGatway, deleteGatway} from '../api'
+import {useEffect, useState} from 'react'
+import {GatewayType} from '../types'
+import {deleteGatway} from '../api'
 import GatewayInput from './GatewayInput'
-import Preipheral from './Peripheral'
 import styles from './Gateway.module.css'
 
 interface ProTypes {
@@ -21,11 +20,15 @@ function Gateway(props: ProTypes) {
   }, [props.gateway, props.editMode])
 
   const deleteHandler = async () => {
-    if (!gateway?._id) return
-    const res = await deleteGatway(gateway?._id)
+    try {
+      if (!gateway?._id) return
+      await deleteGatway(gateway?._id)
 
-    props.deleteFromStack(gateway?._id)
-    setGateway(null)
+      props.deleteFromStack(gateway?._id)
+      setGateway(null)
+    } catch (err) {
+      console.log(err)
+    }
   }
 
   return (

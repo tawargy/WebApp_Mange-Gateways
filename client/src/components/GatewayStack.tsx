@@ -5,7 +5,7 @@ import Gateway from './Gateway'
 import GatewayInput from './GatewayInput'
 
 import PeripheralStack from './PeripheralStack'
-import styles from  './GatewayStack.module.css'
+import styles from './GatewayStack.module.css'
 
 function GatewayStack() {
   const [gateways, setGateways] = useState<GatewayType[]>()
@@ -15,9 +15,14 @@ function GatewayStack() {
   const [editMode, setEditMode] = useState(true)
   useEffect(() => {
     const setDate = async () => {
-      const data = await getGatways()
-      if (!data) return
-      setGateways(data)
+      try {
+        const data = await getGatways()
+        if (!data) return
+
+        setGateways(data)
+      } catch (err) {
+        console.log(err)
+      }
     }
     setDate()
   }, [])
@@ -54,21 +59,23 @@ function GatewayStack() {
       g.unshift(gateway)
       setGateways(g)
     }
-    console.log('ggg',gateway)
+    console.log('ggg', gateway)
     setGateway(gateway)
     setViewMode(true)
     setEditMode(false)
     setAddMode(false)
   }
-  const deleteFromStack=(id:string)=>{
-    const g=gateways?.filter((gat:GatewayType)=>gat._id !== id)
+  const deleteFromStack = (id: string) => {
+    const g = gateways?.filter((gat: GatewayType) => gat._id !== id)
     setGateways(g)
   }
 
   return (
-    <div className={ styles.gatewayContainer}>
+    <div className={styles.gatewayContainer}>
       <div className={styles.gatewayStack}>
-        <button className={styles.btnAdd} onClick={addHandler}>Add</button>
+        <button className={styles.btnAdd} onClick={addHandler}>
+          Add
+        </button>
         {gateways &&
           gateways.map((gateway: GatewayType) => {
             return (
@@ -90,12 +97,12 @@ function GatewayStack() {
         {viewMode ? (
           gateway && (
             <>
-            <Gateway
-              gateway={gateway}
-              editMode={editMode}
-              updateStack={updateStack}
-              deleteFromStack={deleteFromStack}
-            />
+              <Gateway
+                gateway={gateway}
+                editMode={editMode}
+                updateStack={updateStack}
+                deleteFromStack={deleteFromStack}
+              />
               <PeripheralStack gateway={gateway} />
             </>
           )

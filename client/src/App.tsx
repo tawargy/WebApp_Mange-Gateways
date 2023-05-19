@@ -1,4 +1,3 @@
-import React, {useState} from 'react'
 import GatewayStack from './components/GatewayStack'
 import'./App.css'
 function App() {

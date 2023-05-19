@@ -1,5 +1,5 @@
-import {useEffect, useState} from 'react'
-import {GatewayType, PeripheralType} from '../types'
+import { useState} from 'react'
+import { PeripheralType} from '../types'
 import {deletePeripheral, updatePeripheral} from '../api'
 import styles from './Peripheral.module.css'
 
@@ -18,24 +18,31 @@ const Peripheral = (props: PropTypes) => {
     setEditMode(!editMode)
   }
   const updateHandler = async () => {
-    const res = await updatePeripheral({
-      _id: props.peripheral._id,
-      uid,
-      vendor,
-      status,
-    })
-    if (!res) return
+    try {
+      const res = await updatePeripheral({
+        _id: props.peripheral._id,
+        uid,
+        vendor,
+        status,
+      })
+      if (!res) return
 
-    setSatus(res.status)
-    setVendor(res.vendor)
-    setUid(res.uid)
-    setEditMode(false)
+      setSatus(res.status)
+      setVendor(res.vendor)
+      setUid(res.uid)
+      setEditMode(false)
+    } catch (err) {
+      console.log(err)
+    }
   }
 
   const deleteHandler = async () => {
-    await deletePeripheral(props.peripheral._id)
-
-    props.deleteFromStack(props.peripheral._id)
+    try {
+      await deletePeripheral(props.peripheral._id)
+      props.deleteFromStack(props.peripheral._id)
+    } catch (err) {
+      console.log(err)
+    }
   }
   return (
     <div className={styles.peripheralComponent}>
@@ -76,8 +83,6 @@ const Peripheral = (props: PropTypes) => {
                 onChange={(e) => setSatus(e.target.value)}
               />
             </div>
-
-          
           </div>
           <button className={styles.btnEdit} onClick={updateHandler}>
             Edit

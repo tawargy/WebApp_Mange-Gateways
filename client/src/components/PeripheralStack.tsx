@@ -15,28 +15,35 @@ const PeripheralStack = (props: PropTypes) => {
   const [vendor, setVendor] = useState('')
   const [status, setSatus] = useState('')
   const [addMode, setAddMode] = useState(false)
+
   const addHandler = () => {
     setAddMode(!addMode)
   }
-  useEffect(()=>{
+
+  useEffect(() => {
     setPeripherals(props.gateway.peripherals)
-  },[props.gateway])
+  }, [props.gateway])
+
   const addPeripheralHandler = async () => {
-    const res = await addPeripheral({
-      uid,
-      vendor,
-      status,
-      gatewayId: props.gateway._id,
-    })
-    if (!res) return
-    console.log(res)
-    const p = peripherals
-    p.unshift(res)
-    setPeripherals(p)
-    setUid(0)
-    setVendor('')
-    setSatus('')
-    setAddMode(false)
+    try {
+      const res = await addPeripheral({
+        uid,
+        vendor,
+        status,
+        gatewayId: props.gateway._id,
+      })
+      if (!res) return
+      console.log(res)
+      const p = peripherals
+      p.unshift(res)
+      setPeripherals(p)
+      setUid(0)
+      setVendor('')
+      setSatus('')
+      setAddMode(false)
+    } catch (err) {
+      console.log(err)
+    }
   }
   const deleteFromStack = (id: string) => {
     const per = peripherals?.filter((p: PeripheralType) => p._id !== id)
@@ -44,7 +51,7 @@ const PeripheralStack = (props: PropTypes) => {
   }
   return (
     <div className={styles.peripherals}>
-      {peripherals&& <h4>Peripheral</h4>}
+      {peripherals && <h4>Peripheral</h4>}
       <button className={styles.btnAddMain} onClick={addHandler}>
         <i className="fa-solid fa-plus"></i>
       </button>
@@ -76,7 +83,6 @@ const PeripheralStack = (props: PropTypes) => {
                 onChange={(e) => setSatus(e.target.value)}
               />
             </div>
-           
           </div>
           <button className={styles.btnAdd} onClick={addPeripheralHandler}>
             Add

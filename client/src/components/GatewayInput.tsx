@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import  { useState} from 'react'
 import {GatewayType} from '../types'
 import {addGateway, updateGatway} from '../api'
 
@@ -19,21 +19,33 @@ const GatewayInput = (props: ProTypes) => {
   const [serial, setSerial] = useState(gatewaySerial)
   const [name, setName] = useState(gatewayName)
   const [ip, setIp] = useState(gatewayIp)
-  const [addMode, setMode] = useState(props.addMode)
 
   const addHandler = async () => {
-    const res = await addGateway({serial, name, ip})
-    if (!res || !props.addToStack) return
-    props.addToStack(res)
-    setSerial('')
-    setIp('')
-    setName('')
+    try {
+      const res = await addGateway({serial, name, ip})
+      if (!res || !props.addToStack) return
+      props.addToStack(res)
+      setSerial('')
+      setIp('')
+      setName('')
+    } catch (err) {
+      console.log(err)
+    }
   }
   const updateHandler = async () => {
-    if (!props.gateway?._id) return
-    const res = await updateGatway({serial, ip, name, _id: props.gateway?._id})
-    if (!res || !props.updateStack) return
-    props.updateStack(res)
+    try {
+      if (!props.gateway?._id) return
+      const res = await updateGatway({
+        serial,
+        ip,
+        name,
+        _id: props.gateway?._id,
+      })
+      if (!res || !props.updateStack) return
+      props.updateStack(res)
+    } catch (err) {
+      console.log(err)
+    }
   }
 
   return (
@@ -59,9 +71,8 @@ const GatewayInput = (props: ProTypes) => {
           <label htmlFor="ip">ip</label>
           <input name="ip" value={ip} onChange={(e) => setIp(e.target.value)} />
         </div>
-      
       </div>
-      {addMode ? (
+      {props.addMode ? (
         <button className={styles.btnAdd} onClick={addHandler}>
           Add
         </button>
