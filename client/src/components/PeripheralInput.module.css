@@ -1,0 +1,86 @@
+.peripheralForm{
+  border:1px solid  #79c7c5;
+  border-radius:4px;
+}
+.form{
+
+
+  display: flex;
+  justify-content: space-around;
+}
+.peripheralForm .formGroup label {
+  display:block;
+  padding: 0.3rem;
+  color: #868b8e;
+  width:80%;
+  margin:.3rem auto
+
+}
+.peripheralForm .formGroup input {
+  display: block;
+  padding: 0.3rem;
+  border-radius: 0.3rem;
+  border: none;
+  font-size: 1rem;
+  background-color: #f4f7f7;
+  width:80%;
+  margin:auto;
+}
+
+ .btnAdd {
+  display: block;
+  padding: 1rem;
+  margin:.5rem auto;
+  width: 30%;
+  background-color: #79c7c5;
+  color: #fff;
+  font-size: 1.2rem;
+  border-radius: 0.4rem;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+
+@media (max-width: 576px){
+ .peripheralForm{
+    flex-direction: column;
+    padding:0;
+    margin-top:1.5rem;
+  }
+ .peripheralForm .formGroup {
+    width: 100%;
+
+  }
+.peripheralForm .formGroup label{
+    font-size:.9rem;
+  } 
+ .peripheralForm .formGroup input {
+    width: 100%;
+    margin:1rem auto;
+    font-size:.8rem;
+
+  }
+ .btnAdd {
+  padding: .5rem;
+ font-size: .7rem;
+  }
+
+}
+
+
+
+@media (min-width:577px) and (max-width: 1200px) {
+ .peripheralForm .form {
+    flex-direction: column;
+  }
+ .peripheralForm .formGroup {
+    width: 80%;
+    margin: auto;
+  }
+
+ .btnAdd {
+  padding: .5rem;
+ font-size: .9rem;
+    margin-bottom:1rem;
+  }
+}

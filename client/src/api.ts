@@ -2,37 +2,44 @@ import {GatewayType, PeripheralType} from './types'
 
 const URL = 'http://localhost:5000/'
 
-export const getGatways = async (): Promise<GatewayType[] | undefined> => {
-  try {
-    const res = await fetch(`${URL}gateway`)
-    const data = await res.json()
-    return data.data
-  } catch (err) {
-    if (err instanceof Error) {
-      throw err
-    }
-  }
+type GetGatewayRes = {
+  data: GatewayType[]
+  message?: string
 }
 
-//const url=process.env.PUBLIC_URL
+export const getGatwaysApi = async (): Promise<GetGatewayRes | undefined> => {
+  try {
+    const res = await fetch(`${URL}gateway`)
 
-export const getGatwayById = async (
+    return await res.json()
+  } catch (err) {
+    if (err instanceof Error) console.log(err.message)
+  }
+}
+type GetGatewayByIdRes = {
+  data: GatewayType
+  message?: string
+}
+export const getGatwayByIdApi = async (
   gId: string,
-): Promise<GatewayType | undefined> => {
+): Promise<GetGatewayByIdRes | undefined> => {
   try {
     const res = await fetch(`${URL}gateway/${gId}`)
-    const data = await res.json()
-
-    return data.data
+    return await res.json()
   } catch (err) {
-    if (err instanceof Error) throw err
+    if (err instanceof Error) console.log(err.message)
   }
 }
 
 type gatewayAdd = Pick<GatewayType, 'serial' | 'name' | 'ip'>
-export const addGateway = async (
+type AddGatewayRes = {
+  data: GatewayType
+  message?: string
+}
+
+export const addGatewayApi = async (
   gateway: gatewayAdd,
-): Promise<GatewayType | undefined> => {
+): Promise<AddGatewayRes | undefined> => {
   try {
     const res = await fetch(`${URL}gateway`, {
       method: 'POST',
@@ -45,17 +52,24 @@ export const addGateway = async (
         ip: gateway.ip,
       }),
     })
-    const data = await res.json()
-    return data.data
+
+    return await res.json()
   } catch (err) {
-    if (err instanceof Error) throw err
+    if (err instanceof Error) {
+      console.log(err.message)
+    }
   }
 }
 
 type gatewayUpdate = Pick<GatewayType, '_id' | 'serial' | 'name' | 'ip'>
-export const updateGatway = async (
+type updateGatewayRes = {
+  data: GatewayType
+  message?: string
+}
+
+export const updateGatwayApi = async (
   gateway: gatewayUpdate,
-): Promise<GatewayType | undefined> => {
+): Promise<updateGatewayRes | undefined> => {
   try {
     const res = await fetch(`${URL}gateway/${gateway._id}`, {
       method: 'PUT',
@@ -68,24 +82,27 @@ export const updateGatway = async (
         ip: gateway.ip,
       }),
     })
-    const data = await res.json()
-
-    return data.data
+    return await res.json()
   } catch (err) {
-    if (err instanceof Error) throw err
+    if (err instanceof Error) console.log('Errrror',err.message)
   }
 }
 
-export const deleteGatway = async (gId: string): Promise<{} | undefined> => {
+type deleteGatewayRes = {
+  data: GatewayType
+  message?: string
+}
+export const deleteGatwayApi = async (
+  gId: string,
+): Promise<deleteGatewayRes | undefined> => {
+  const res = await fetch(`${URL}gateway/${gId}`, {
+    method: 'DELETE',
+  })
   try {
-    const res = await fetch(`${URL}gateway/${gId}`, {
-      method: 'DELETE',
-    })
     const data = await res.json()
-
     return data.data
   } catch (err) {
-    if (err instanceof Error) throw err
+    if (err instanceof Error) console.log(err)
   }
 }
 
@@ -93,9 +110,14 @@ type peripheralAdd = Pick<
   PeripheralType,
   'uid' | 'vendor' | 'status' | 'gatewayId'
 >
-export const addPeripheral = async (
+type AddPerRes = {
+  data: PeripheralType
+  message?: string
+}
+
+export const addPeripheralApi = async (
   peripheral: peripheralAdd,
-): Promise<PeripheralType | undefined> => {
+): Promise<AddPerRes | undefined> => {
   try {
     const res = await fetch(`${URL}peripheral`, {
       method: 'POST',
@@ -109,11 +131,9 @@ export const addPeripheral = async (
         gatewayId: peripheral.gatewayId,
       }),
     })
-    const data = await res.json()
-
-    return data.data
+    return await res.json()
   } catch (err) {
-    if (err instanceof Error) throw err
+    if (err instanceof Error) console.log(err.message)
   }
 }
 
@@ -121,9 +141,13 @@ type peripheralUpdate = Pick<
   PeripheralType,
   '_id' | 'uid' | 'vendor' | 'status'
 >
-export const updatePeripheral = async (
+type UpdatePerRes = {
+  data: PeripheralType
+  message?: string
+}
+export const updatePeripheralApi = async (
   peripheral: peripheralUpdate,
-): Promise<PeripheralType | undefined> => {
+): Promise<UpdatePerRes | undefined> => {
   try {
     const res = await fetch(`${URL}peripheral/${peripheral._id}`, {
       method: 'PUT',
@@ -136,25 +160,20 @@ export const updatePeripheral = async (
         status: peripheral.status,
       }),
     })
-    const data = await res.json()
-
-    return data.data
+    return await res.json()
   } catch (err) {
-    if (err instanceof Error) throw err
+    if (err instanceof Error) console.log(err.message)
   }
 }
-
-export const deletePeripheral = async (
+export const deletePeripheralApi = async (
   pId: string,
 ): Promise<{} | undefined> => {
   try {
     const res = await fetch(`${URL}peripheral/${pId}`, {
       method: 'DELETE',
     })
-    const data = await res.json()
-
-    return data.data
+    return await res.json()
   } catch (err) {
-    if (err instanceof Error) throw err
+    if (err instanceof Error) console.log(err.message)
   }
 }

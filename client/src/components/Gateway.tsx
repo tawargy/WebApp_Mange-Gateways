@@ -1,73 +1,104 @@
-import {useEffect, useState} from 'react'
+import {useAppContext} from '../context/appContext'
+import {updateGatwayApi, deleteGatwayApi} from '../api'
 import {GatewayType} from '../types'
-import {deleteGatway} from '../api'
 import GatewayInput from './GatewayInput'
 import styles from './Gateway.module.css'
+import PeripheralView from './PeripheralView'
 
-interface ProTypes {
-  gateway: GatewayType
-  editMode: boolean
-  updateStack: (gateway: GatewayType) => void
-  deleteFromStack: (id: string) => void
-}
-function Gateway(props: ProTypes) {
-  const [gateway, setGateway] = useState<GatewayType | null>(props.gateway)
-  const [editMode, setEditMode] = useState(props.editMode)
+type Gateway = Pick<GatewayType, 'serial' | 'name' | 'ip' | '_id'>
 
-  useEffect(() => {
-    setGateway(props.gateway)
-    setEditMode(props.editMode)
-  }, [props.gateway, props.editMode])
+const Gateway = () => {
+  const {
+    gateway,
+    gateways,
+    setGateway,
+    setGateways,
+    setPeripherals,
+    isGatewayEditMode,
+    setIsGatewayEditMode,
+    setError,
+  } = useAppContext()
 
-  const deleteHandler = async () => {
-    try {
-      if (!gateway?._id) return
-      await deleteGatway(gateway?._id)
+  const editGateway = async (gateway: Gateway) => {
+    if (!gateway) return
+    const res = await updateGatwayApi(gateway)
+    if (!res) return
+    if (res?.message) {
+      setError(res.message)
+      setTimeout(() => {
+        setError('')
+      }, 3000)
+      return
+    }
+    setGateway(res.data)
+    if (gateways) {
+      const gArr = gateways.filter((gg: GatewayType) => gg._id !== gateway._id)
+      gArr.unshift(res.data)
+      setGateways(gArr)
+    }
+    setPeripherals(res.data.peripherals)
+  }
 
-      props.deleteFromStack(gateway?._id)
-      setGateway(null)
-    } catch (err) {
-      if (err instanceof Error) {
-        alert(err.message)
-      }
+  const deleteGateway = async () => {
+    if (!gateway?._id) return
+    await deleteGatwayApi(gateway._id)
+
+    if (gateways) {
+      const gArr = gateways.filter((gg: GatewayType) => gg._id !== gateway._id)
+      setGateways(gArr)
+      setGateway(undefined)
+      setPeripherals(undefined)
     }
   }
 
   return (
-    <div className={styles.containerView}>
-      {gateway && (
-        <>
-          <div className={styles.controller}>
-            <button
-              className={styles.btnEdit}
-              onClick={() => setEditMode(!editMode)}
-            >
-              <i className="fas fa-edit"></i>
-            </button>
-            <button className={styles.btnDelete} onClick={deleteHandler}>
-              <i className="fa fa-window-close" aria-hidden="true"></i>
-            </button>
-          </div>
-        </>
+    <div className={styles.gateway}>
+   
+      {isGatewayEditMode ? (
+        <GatewayInput isAddMode={false} editGateway={editGateway} />
+      ) : (
+        gateway && (
+          <>
+            <table className={styles.gatewayTable}>
+              <caption>Gateway</caption>
+              <thead>
+                <tr>
+                  <th>Serial</th>
+                  <th>Name</th>
+                  <th>Ip</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>{gateway.serial}</td>
+                  <td>{gateway.name}</td>
+                  <td>{gateway.ip}</td>
+                  <td>
+                    <div className={styles.gatewayController}>
+                      <button
+                        className={styles.btnEdit}
+                        onClick={() => setIsGatewayEditMode(true)}
+                      >
+                        <i className="fas fa-edit"></i>
+                      </button>
+                      <button
+                        className={styles.btnDelete}
+                        onClick={deleteGateway}
+                      >
+                        <i
+                          className="fa fa-window-close"
+                          aria-hidden="true"
+                        ></i>
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <PeripheralView />
+          </>
+        )
       )}
-      {editMode
-        ? gateway && (
-            <GatewayInput
-              gateway={gateway}
-              addMode={false}
-              updateStack={props.updateStack}
-            />
-          )
-        : gateway && (
-            <>
-              <h3>Gateway</h3>
-              <div className={styles.gatewayView}>
-                <span>Serial : {gateway.serial}</span>
-                <span>Name : {gateway.name}</span>
-                <span>Ip : {gateway.ip}</span>
-              </div>
-            </>
-          )}
     </div>
   )
 }

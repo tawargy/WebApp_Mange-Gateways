@@ -1,92 +1,79 @@
 import {useState} from 'react'
+import {useAppContext} from '../context/appContext'
 import {GatewayType} from '../types'
-import {addGateway, updateGatway} from '../api'
-
 import styles from './GatewayInput.module.css'
 
-interface ProTypes {
-  gateway: GatewayType | undefined
-  addMode: boolean
-  addToStack?: (gateway: GatewayType) => void
-  updateStack?: (gateway: GatewayType) => void
+type Gateway = Pick<GatewayType, 'serial' | 'name' | 'ip'|'_id'>
+type Props = {
+
+  isAddMode: boolean
+  addGateway?: (gateway: Gateway) => Promise<void>
+  editGateway?: (gateway: Gateway) => Promise<void>
 }
+const GatewayInput = (props: Props) => {
+  const {gateway,setIsGatewayEditMode} = useAppContext()
+  const [serial, setSerial] = useState(gateway?.serial)
+  const [name, setName] = useState(gateway?.name)
+  const [ip, setIp] = useState(gateway?.ip)
 
-const GatewayInput = (props: ProTypes) => {
-  let gatewaySerial = props.gateway?.serial || '',
-    gatewayName = props.gateway?.name || '',
-    gatewayIp = props.gateway?.ip || ''
 
-  const [serial, setSerial] = useState(gatewaySerial)
-  const [name, setName] = useState(gatewayName)
-  const [ip, setIp] = useState(gatewayIp)
 
-  const addHandler = async () => {
-    try {
-      const res = await addGateway({serial, name, ip})
-      if (!res || !props.addToStack) return
-      props.addToStack(res)
-      setSerial('')
-      setIp('')
-      setName('')
-    } catch (err) {
-      if (err instanceof Error) {
-        alert(err.message)
-      }
-    }
+  const addGatewayHandler = () => {
+    if (!serial || !name || !ip) return
+    if (!props.addGateway) return
+    props.addGateway({name, serial, ip})
+    
   }
-  const updateHandler = async () => {
-    try {
-      if (!props.gateway?._id) return
-      const res = await updateGatway({
-        serial,
-        ip,
-        name,
-        _id: props.gateway?._id,
-      })
-      if (!res || !props.updateStack) return
-      props.updateStack(res)
-    } catch (err) {
-      if (err instanceof Error) {
-        alert(err.message)
-      }
-    }
+  const editGatewayHandler = () => {
+    if (!serial || !name || !ip || !gateway?._id) return
+    if (!props.editGateway) return
+    props.editGateway({serial, name, ip,_id:gateway?._id})
+    setIsGatewayEditMode(false)
   }
 
-  return (
-    <>
-      <div className={styles.form}>
-        <div className={styles.formGroup}>
-          <label htmlFor="serial">serial</label>
-          <input
-            name="serial"
-            value={serial}
-            onChange={(e) => setSerial(e.target.value)}
-          />
+
+
+    return (
+      <>
+        <div className={styles.form}>
+          <div className={styles.formGroup}>
+            <label htmlFor="serial">serial</label>
+            <input
+              name="serial"
+              value={serial}
+              onChange={(e) => setSerial(e.target.value)}
+            />
+          </div>
+          <div className={styles.formGroup}>
+            <label htmlFor="name">name</label>
+            <input
+              name="name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            />
+          </div>
+          <div className={styles.formGroup}>
+            <label htmlFor="ip">ip</label>
+            <input
+              name="ip"
+              value={ip}
+              onChange={(e) => setIp(e.target.value)}
+            />
+          </div>
         </div>
-        <div className={styles.formGroup}>
-          <label htmlFor="name">name</label>
-          <input
-            name="name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-          />
-        </div>
-        <div className={styles.formGroup}>
-          <label htmlFor="ip">ip</label>
-          <input name="ip" value={ip} onChange={(e) => setIp(e.target.value)} />
-        </div>
-      </div>
-      {props.addMode ? (
-        <button className={styles.btnAdd} onClick={addHandler}>
-          Add
-        </button>
-      ) : (
-        <button className={styles.btnEdit} onClick={updateHandler}>
-          Edit
-        </button>
-      )}
-    </>
-  )
+        {props.isAddMode ? (
+          <button className={styles.btnAdd} onClick={addGatewayHandler}>
+            Add
+          </button>
+        ) : (
+          <button className={styles.btnEdit} onClick={editGatewayHandler}>
+            Edit
+          </button>
+        )}
+      </>
+    )
+
+    
 }
 
 export default GatewayInput

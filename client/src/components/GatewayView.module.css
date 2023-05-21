@@ -1,0 +1,11 @@
+.gatewayInfo {
+  width: 60%;
+  padding: 1rem;
+}
+
+@media (max-width: 576px) {
+  .gatewayInfo {
+    width: 80%;
+    padding: 0;
+  }
+}

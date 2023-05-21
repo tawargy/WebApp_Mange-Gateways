@@ -1,0 +1,30 @@
+.peripheralView{
+
+margin-top:3rem;
+  padding:1rem;
+  position:relative;
+}
+h3{
+  text-align:center;
+  font-weight:400
+}
+.btnAdd{
+  position:absolute;
+  right:1rem;
+  top:1rem;
+  color:blue;
+  font-size:1rem;
+  border:none
+}
+
+
+@media(max-width:576px){
+  .peripheralView{
+    padding:0;
+    margin-top:1rem;
+  }
+  h3{
+    font-size:.9rem;
+  }
+}
+

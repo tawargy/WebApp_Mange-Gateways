@@ -1,123 +1,77 @@
-import React, {useState, useEffect} from 'react'
-import {getGatways, getGatwayById} from '../api'
+import React, {useEffect} from 'react'
+import {useAppContext} from '../context/appContext'
 import {GatewayType} from '../types'
-import Gateway from './Gateway'
-import GatewayInput from './GatewayInput'
-
-import PeripheralStack from './PeripheralStack'
+import {getGatwaysApi, getGatwayByIdApi} from '../api'
 import styles from './GatewayStack.module.css'
 
-function GatewayStack() {
-  const [gateways, setGateways] = useState<GatewayType[]>()
-  const [gateway, setGateway] = useState<GatewayType>()
-  const [viewMode, setViewMode] = useState(true)
-  const [addMode, setAddMode] = useState(true)
-  const [editMode, setEditMode] = useState(true)
-  useEffect(() => {
-    const setDate = async () => {
-      try {
-        const data = await getGatways()
-        if (!data) return
+const GateWayStack = () => {
+  const {
+    gateways,
+    setGateways,
+    setGateway,
+    setIsGatewayAddMode,
+    setIsGatewayEditMode,
+    setPeripherals,
+    setError,
+  } = useAppContext()
 
-        setGateways(data)
-      } catch (err) {
-        if(err instanceof Error){
-        alert(err.message)
-        }
-      }
+  useEffect(() => {
+    const setGatewaysList = async () => {
+      const res = await getGatwaysApi()
+      if (!res) return
+
+      setGateways(res.data)
     }
-    setDate()
+    setGatewaysList()
   }, [])
 
-  const addHandler = () => {
-    setViewMode(false)
-    setAddMode(true)
-    setEditMode(true)
+  const addNewGatewayHandler = () => {
+    setIsGatewayAddMode(true)
   }
 
-  const gatewayClickHandler = async (e: React.MouseEvent<HTMLDivElement>) => {
+  const gatewayViewClickHandler = async (
+    e: React.MouseEvent<HTMLDivElement>,
+  ) => {
     const id = e.currentTarget.id
-    const res = await getGatwayById(id)
-    setGateway(res)
-    setViewMode(true)
-    setEditMode(false)
-  }
+    setIsGatewayAddMode(false)
+    setIsGatewayEditMode(false)
+    const res = await getGatwayByIdApi(id)
+    if (!res) return
+    if (res.message) {
+      setError(res.message)
+      return
+    }
 
-  const addToStack = (gateway: GatewayType) => {
-    if (gateways) {
-      const g = gateways
-      g.unshift(gateway)
-      setGateways(g)
-    } else {
-      setGateways([gateway])
-    }
-    setGateway(gateway)
-    setViewMode(true)
-    setEditMode(false)
-  }
-  const updateStack = (gateway: GatewayType) => {
-    if (gateways) {
-      const g = gateways.filter((gg: GatewayType) => gg._id !== gateway._id)
-      g.unshift(gateway)
-      setGateways(g)
-    }
-    console.log('ggg', gateway)
-    setGateway(gateway)
-    setViewMode(true)
-    setEditMode(false)
-    setAddMode(false)
-  }
-  const deleteFromStack = (id: string) => {
-    const g = gateways?.filter((gat: GatewayType) => gat._id !== id)
-    setGateways(g)
+    setGateway(res.data)
+    setPeripherals(res.data.peripherals)
   }
 
   return (
-    <div className={styles.gatewayContainer}>
-      <div className={styles.gatewayStack}>
-        <button className={styles.btnAdd} onClick={addHandler}>
-          Add
-        </button>
-        {gateways &&
-          gateways.map((gateway: GatewayType) => {
-            return (
-              <div
-                key={gateway._id}
-                className={styles.gatewayName}
-                onClick={gatewayClickHandler}
-                id={gateway._id}
-              >
-                <span> {gateway.serial}</span>
+    <div className={styles.gatewayStack}>
+      <button className={styles.btnAdd} onClick={addNewGatewayHandler}>
+        Add Gateway
+      </button>
+      {gateways &&
+        gateways.map((gateway: GatewayType) => {
+          return (
+            <div
+              key={gateway._id}
+              className={styles.gatewayName}
+              onClick={gatewayViewClickHandler}
+              id={gateway._id}
+            >
+              <span className={styles.gatewaySerial}> {gateway.serial}</span>
+              <span className={styles.gatewayCircle}>
                 <span className={styles.gatewayLength}>
-                  {gateway.peripherals?.length}
+                  {' '}
+                  {gateway.peripherals?.length}{' '}
                 </span>
-              </div>
-            )
-          })}
-      </div>
-      <div className={styles.gatewayInfo}>
-        {viewMode ? (
-          gateway && (
-            <>
-              <Gateway
-                gateway={gateway}
-                editMode={editMode}
-                updateStack={updateStack}
-                deleteFromStack={deleteFromStack}
-              />
-              <PeripheralStack gateway={gateway} />
-            </>
+              </span>
+            </div>
           )
-        ) : (
-          <GatewayInput
-            gateway={undefined}
-            addMode={addMode}
-            addToStack={addToStack}
-          />
-        )}
-      </div>
+        })}
     </div>
   )
 }
 
-export default GatewayStack
+export default GateWayStack
