@@ -19,7 +19,9 @@
 
   border: none;
 }
-
+tbody td{
+  text-align:center;
+}
 
 
 @media (max-width: 576px) {
