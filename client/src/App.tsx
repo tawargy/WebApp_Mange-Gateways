@@ -1,13 +1,11 @@
-import {useAppContext} from './context/appContext'
-import GatewayStack from './components/GatewayStack'
-import GateWayView from './components/GatewayView'
-import Gateway from './components/Gateway'
-import GatewayAdd from './components/GatewayAdd'
-import styles from './App.module.css'
+import { useAppContext } from './context/appContext';
+import GatewayList from './screen/GatewayList';
+import GatewayWrapper from './screen/GatewayWrapper';
 
-const App = () => {
-  const {gateway, isGatewayAddMode, error} = useAppContext()
-  const refresh = () => window.location.reload()
+import styles from './App.module.css';
+
+function App() {
+  const { error } = useAppContext();
 
   return (
     <div className={styles.app}>
@@ -16,16 +14,15 @@ const App = () => {
           <p>{error}</p>
         </div>
       )}
-      <h1 onClick={refresh}>Gateway Manger</h1>
-
-      <div className={styles.appView} >
-        <GatewayStack />
-        <GateWayView>
-          {isGatewayAddMode ? <GatewayAdd /> : gateway && <Gateway />}
-        </GateWayView>
+      <h1>
+        <a href="/"> Gateway Manger </a>
+      </h1>
+      <div className={styles.appView}>
+        <GatewayList />
+        <GatewayWrapper />
       </div>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;

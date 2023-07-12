@@ -26,7 +26,7 @@ interface State {
   setIsPerEditMode: React.Dispatch<React.SetStateAction<boolean>>
 
   error: string | undefined
-  setError: React.Dispatch<React.SetStateAction<string>>
+  addError:(message:string)=>void
 }
 
 const AppContext = createContext<State>({} as State)
@@ -41,6 +41,13 @@ const AppProvider = ({children}: {children: React.ReactNode}) => {
   const [isPerAddMode, setIsPerAddMode] = useState(false)
   const [isPerEditMode, setIsPerEditMode] = useState(false)
   const [error, setError] = useState('')
+
+  const addError = (message: string) => {
+    setError(message)
+    setTimeout(() => {
+      setError('')
+    }, 4000)
+  }
 
   return (
     <AppContext.Provider
@@ -62,7 +69,7 @@ const AppProvider = ({children}: {children: React.ReactNode}) => {
         isPerEditMode,
         setIsPerEditMode,
         error,
-        setError,
+        addError,
       }}
     >
       {children}
