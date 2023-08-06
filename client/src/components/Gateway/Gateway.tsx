@@ -1,6 +1,6 @@
 import { useAppContext } from '../../context/appContext';
 import api from '../../Api/api';
-import { GatewayType, gatewayUpdate } from '../../types';
+import { GatewayType, GatewayUpdateParam } from '../../types';
 import GatewayForm from './GatewayForm';
 import PeripheralWrapper from '../Peripheral/PeripheralWrapper';
 
@@ -18,7 +18,7 @@ function Gateway() {
     addError,
   } = useAppContext();
 
-  const editGateway = async (gatewayEdit: gatewayUpdate) => {
+  const editGateway = async (gatewayEdit: GatewayUpdateParam) => {
     if (gatewayEdit) {
       const res = await api.updateGatway(gatewayEdit);
       if (res) {

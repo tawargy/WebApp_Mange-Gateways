@@ -1,14 +1,14 @@
 import { useEffect, useState } from 'react';
 import { useAppContext } from '../../context/appContext';
-import { gatewayUpdate, gatewayAdd } from '../../types';
+import { GatewayUpdateParam, GatewayAddParam } from '../../types';
 import styles from './GatewayForm.module.css';
 
 type GatewayFormProps = {
   isAddMode: boolean;
   // eslint-disable-next-line
-  addGateway?: (gateway: gatewayAdd) => Promise<void>;
+  addGateway?: (gateway: GatewayAddParam) => Promise<void>;
   // eslint-disable-next-line
-  editGateway?: (gateway: gatewayUpdate) => Promise<void>;
+  editGateway?: (gateway: GatewayUpdateParam) => Promise<void>;
 };
 
 function GatewayForm(props: GatewayFormProps) {

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useAppContext } from '../../context/appContext';
-import { PeripheralType, peripheralUpdate } from '../../types';
+import { PeripheralType, PeripheralUpdateParam } from '../../types';
 import api from '../../Api/api';
 import PeripheralEdit from './PeripheralEdit';
 import styles from './Peripheral.module.css';
@@ -33,7 +33,7 @@ function Peripheral(props: Props) {
     setIsPerEditMode(true);
   };
 
-  const peripheralEdit = async (peripheralArg: peripheralUpdate) => {
+  const peripheralEdit = async (peripheralArg: PeripheralUpdateParam) => {
     if (!gatewayId) return;
 
     const res = await api.updatePeripheral(peripheralArg);

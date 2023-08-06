@@ -1,5 +1,5 @@
 import GatewayForm from './GatewayForm';
-import { gatewayAdd } from '../../types';
+import { GatewayAddParam } from '../../types';
 import api from '../../Api/api';
 import { useAppContext } from '../../context/appContext';
 
@@ -15,7 +15,7 @@ function GatewayAdd() {
     setIsGatewayAddMode,
   } = useAppContext();
 
-  const addGateway = async (gateway: gatewayAdd) => {
+  const addGateway = async (gateway: GatewayAddParam) => {
     const res = await api.addGateway(gateway);
     if (res) {
       if (res.message) {
