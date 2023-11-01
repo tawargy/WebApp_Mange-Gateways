@@ -1,0 +1,22 @@
+th, td {
+    width: 100px; /* Set a fixed width for all cells */
+    height: 30px; /* Set a fixed height for all cells */
+  }
+.peripheralRowEdit input {
+  background-color: #f7f0e9;
+  font-size: .8rem;
+  padding: .3rem;
+  text-align: center;
+  width: 100%; 
+  outline: none;
+  border: none;
+}
+.peripheralRowEdit .btnAdd {
+  background-color: transparent;
+  color: #777;
+  font-size: 1rem;
+  border: none;
+}
+.peripheralRowEdit .btnAdd:hover {
+  color: blue;
+}

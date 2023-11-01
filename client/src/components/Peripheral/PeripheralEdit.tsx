@@ -22,7 +22,7 @@ function PeripheralEdit(props: PeripheralEditProps) {
     peripheralEdit(ppp);
   };
   return (
-    <tr>
+    <tr className={styles.peripheralRowEdit}>
       <td>
         <input
           type="number"
@@ -32,7 +32,6 @@ function PeripheralEdit(props: PeripheralEditProps) {
         />
       </td>
       <td>
-        {' '}
         <input
           name="vendor"
           value={vendor}

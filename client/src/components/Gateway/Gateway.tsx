@@ -74,6 +74,7 @@ function Gateway() {
               >
                 <i className="fas fa-edit" />
               </button>
+
               <button
                 type="button"
                 className={styles.btnDelete}
@@ -82,7 +83,7 @@ function Gateway() {
                 <i className="fa fa-window-close" aria-hidden="true" />
               </button>
             </div>
-            <div>
+            <div className={styles.gatewayInfo}>
               <span>Serial : {gateway.serial}</span>
               <span>Name : {gateway.name}</span>
               <span>Ip : {gateway.ip}</span>

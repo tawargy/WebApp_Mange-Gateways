@@ -37,8 +37,8 @@ function PeripheralWrapper() {
   };
 
   return (
-    <div className={styles.peripheralView}>
-      <h3>Peripherals</h3>
+    <div className={styles.peripheralWrapper}>
+      <h4>Peripherals</h4>
 
       <button
         type="button"

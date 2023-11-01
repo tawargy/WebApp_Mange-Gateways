@@ -8,7 +8,7 @@ function GatewayWrapper() {
   const { isGatewayAddMode } = useAppContext();
 
   return (
-    <div className={styles.gatewayInfo}>
+    <div className={styles.gatewayWrapper}>
       {isGatewayAddMode ? <GatewayAdd /> : <Gateway />}
     </div>
   );

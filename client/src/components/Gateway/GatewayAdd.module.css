@@ -7,19 +7,15 @@
 position:relative;
 }
 .btnClose{
-  color:red;
+  color:#777;
+  background-color:transparent;
 position:absolute;
-  right:1rem;
-  top:1rem;
-  font-size:1.5rem;
+  right:.3rem;
+  top:.3rem;
+  font-size:1rem;
   border:none
 }
-@media (max-width: 576px) {
-
-  .gatewayAdd{
-    padding:.5rem
-  }
-  .btnClose{
-    font-size:.8rem
-  }
+.btnClose:hover{
+  color:red;
 }
+

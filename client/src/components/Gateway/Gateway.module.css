@@ -1,23 +1,67 @@
 .gateway {
-  padding: 1rem;
+ 
   border-radius: 0.4rem;
   -webkit-box-shadow: -5px 0px 37px -7px rgba(0, 0, 0, 0.08);
   -moz-box-shadow: -5px 0px 37px -7px rgba(0, 0, 0, 0.08);
   box-shadow: -5px 0px 37px -7px rgba(0, 0, 0, 0.08);
-}
+  /* position: relative; */
 
+}
+.gateway h3{
+  font-size: 1rem;
+  font-weight: bold;
+  text-align: center;
+}
+.gatewayController {
+ position: absolute;
+
+
+  right: 0;
+  top: 0;
+  padding: .5rem;
+
+}
+/* .gatewayController::after { */
+/*   content: ""; */
+/*   display: table; */
+/*   clear: both; */
+  
+/* } */
  .gatewayController .btnEdit {
-  color: orange;
+  color: #777; 
+  background-color: transparent;
   font-size: 1rem;
   margin-right: 0.5rem;
   border: none;
+
+}
+.gatewayController .btnEdit:hover {
+  color: orange;
+  
 }
 .gatewayController .btnDelete {
-  color: red;
+   color: #777; 
+ background-color: transparent;
   font-size: 1rem;
-
   border: none;
+
 }
+.gatewayController .btnDelete:hover {
+  color: red;
+}
+.gatewayInfo {
+
+  display: flex;
+  flex-direction: column;
+}
+
+.gatewayInfo span {
+  font-size: .9rem;
+  font-weight: bold;
+  padding: 0.5rem;
+}
+
+
 
 .gatewayTable {
   width: 100%;
@@ -40,62 +84,4 @@
   padding: 0.6rem;
 }
 
-@media (max-width: 576px) {
-  .gateway {
-    padding: 0;
-  }
-  .gatewayTable{
-    margin:0
-  }
-  .gatewayTable caption {
-    font-size: 1.2rem;
-    padding: 0;
-  }
-  .gatewayTable thead th {
-    font-size: 0.7rem;
-    padding: 0;
-  }
-  .gatewayTable  td {
-    font-size: 0.7rem;
-    padding: 0;
-  }
-.gatewayController{
-  width:3rem
-}
-.gatewayController  .btnEdit {
-    font-size: 0.8rem;
-  }
-.gatewayController  .btnDelete {
-    font-size: 0.8rem;
-  }
-}
-@media (min-width: 576px) and (max-width: 1200px) {
-  .gateway {
-    padding: 0;
-  }
-.gatewayTable{
-    margin:0
-  }
-  .gatewayTable caption {
-    font-size: 1.5rem;
-    padding: 0;
 
-  }
-  .gatewayTable thead th {
-    font-size: .9rem;
-    padding: 0;
-  }
-  .gatewayTable td {
-    font-size: .9rem;
-    padding: 0;
-  }
-.gatewayController{
-  width:3rem
-}
-.gatewayController  .btnEdit {
-    font-size: 1.2rem;
-  }
-.gatewayController  .btnDelete {
-    font-size: 1.2rem;
-  }
-}

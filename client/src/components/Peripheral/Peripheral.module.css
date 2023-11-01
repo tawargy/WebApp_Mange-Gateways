@@ -2,86 +2,28 @@
   margin-top: 1rem;
   position: relative;
 }
-.peripheralController .btnAdd {
-  color: blue;
-  font-size: 1rem;
-  border: none;
-}
-.peripheralController .btnEdit {
-  color: orange;
+
+.peripheralController .btnEdit,.peripheralController .btnDelete {
+  color: #777;
+  background-color: transparent;
   font-size: 1rem;
   border: none;
   margin-right: 0.6rem;
 }
-.peripheralController .btnDelete {
-  color: red;
-  font-size: 1rem;
-
-  border: none;
+.peripheralController .btnEdit:hover {
+  color: orange;
 }
+.peripheralController .btnDelete:hover {
+  color: red;
+}
+
 tbody td{
   text-align:center;
+  font-size:0.8rem;
+}
+
+tbody td:last-child{
+  text-align:right;
 }
 
 
-@media (max-width: 576px) {
-  .peripheralController {
-    width: 3rem;
-  }
-  .peripheralTable thead th {
-    font-size: 0.8rem;
-  }
-  .peripheralTable td {
-    font-size: 0.8rem;
-  }
-
-  td {
-    padding: 0;
-  }
-  tr input {
-    font-size: 0.8rem;
-    width: 50%;
-  }
-  .peripheralController .btnEdit {
-    font-size: 0.8rem;
-  }
-  .peripheralController .btnAdd {
-    font-size: 0.8rem;
-  }
-  .peripheralController .btnDelete {
-    font-size: 0.8rem;
-  }
-  .trView td {
-    font-size: 0.7rem;
-  }
-}
-@media (min-width: 577px) and (max-width: 1200px) {
-  .peripheralController {
-    width: 3rem;
-  }
-  .peripheralTable thead th {
-    font-size: 1.2rem;
-  }
-  .peripheralTable td {
-    font-size: 1.2rem;
-  }
-  td {
-    padding: 0;
-  }
-  tr input {
-    font-size: 0.9rem;
-    width: 50%;
-  }
-  .peripheralController .btnEdit {
-    font-size: 1.2rem;
-  }
-  .peripheralController .btnAdd {
-    font-size: 1.2rem;
-  }
-  .peripheralController .btnDelete {
-    font-size: 1.2rem;
-  }
-  .trView td {
-    font-size: 0.9rem;
-  }
-}

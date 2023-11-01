@@ -33,6 +33,22 @@
     "prettier/prettier": "error",
     "react/jsx-uses-react": "off",
     "react/react-in-jsx-scope": "off",
-    "no-console": "warn"
+    "no-console": "warn",
+    "jsx-a11y/label-has-associated-control": [
+      "error",
+      {
+        "required": {
+          "some": ["nesting", "id"]
+        }
+      }
+    ],
+    "jsx-a11y/label-has-for": [
+      "error",
+      {
+        "required": {
+          "some": ["nesting", "id"]
+        }
+      }
+    ]
   }
 }

@@ -27,7 +27,7 @@ function PeripheralAdd(props: Props) {
   };
 
   return (
-    <form className={styles.peripheralform}>
+    <form className={styles.peripheralForm}>
       <div className={styles.formGroup}>
         <label htmlFor="uid">
           uid

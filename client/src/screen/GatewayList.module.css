@@ -1,17 +1,31 @@
-.gatewayStack {
-  width: 30%;
-  padding: 0.8rem;
-  border-radius: 0.4rem;
-  -webkit-box-shadow: -5px 0px 37px -7px rgba(0, 0, 0, 0.08);
-  -moz-box-shadow: -5px 0px 37px -7px rgba(0, 0, 0, 0.08);
-  box-shadow: -5px 0px 37px -7px rgba(0, 0, 0, 0.08);
-}
 
+.gatewayStack {
+  width: 250px;
+  height: 100%;
+  padding: 0.8rem;
+  background-color: #fff;
+  position: fixed;
+  left: -250px;
+  z-index: 1;
+  overflow-y: auto;
+  transition: all 0.2s;
+
+
+  /* border-radius: 0.4rem; */
+  /* -webkit-box-shadow: -5px 0px 37px -7px rgba(0, 0, 0, 0.08); */
+  /* -moz-box-shadow: -5px 0px 37px -7px rgba(0, 0, 0, 0.08); */
+  /* box-shadow: -5px 0px 37px -7px rgba(0, 0, 0, 0.08); */
+}
+.show{
+
+  left: 0px;
+
+}
 .btnAdd {
   display: inline-block;
-  padding: 1rem;
+  padding: .5rem;
   margin-bottom: 0.8rem;
-  width: 100%;
+  width: 60%;
   background-color: #79c7c5;
   color: #fff;
   font-size: 1.1rem;
@@ -57,44 +71,4 @@
   font-size: 0.9rem;
 }
 
-@media (max-width: 576px) {
-  .gatewayStack {
-    padding: 0;
-    width: 20%;
-  }
-  .gatewayName {
-    padding: 0.5rem 0;
-    overflow: hidden;
-    margin: 0;
-  }
-  .gatewayCircle {
-    display: none;
-  }
-  .gatewayLength {
-    display: none;
-  }
 
-  .btnAdd {
-    padding: 0.2rem;
-    font-size: 0.7rem;
-    margin: 0;
-  }
-  .gatewaySerial {
-    font-size: 0.8rem;
-  }
-  .gatewayCircle {
-    width: 10%;
-  }
-  .gatewayLength {
-    font-size: 0.6rem;
-  }
-}
-
-@media (min-width: 1000px) {
-  .gatewayCircle {
-    width: 5%;
-  }
-  .gatewayLength {
-    font-size: 0.8rem;
-  }
-}

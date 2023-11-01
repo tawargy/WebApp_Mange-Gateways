@@ -13,6 +13,7 @@ function PeripheralList() {
           <th>uid</th>
           <th>vendor</th>
           <th>status</th>
+          <th> -- </th>
         </tr>
       </thead>
 

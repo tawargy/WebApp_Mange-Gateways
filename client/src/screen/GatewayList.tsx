@@ -5,8 +5,11 @@ import api from '../Api/api';
 import styles from './GatewayList.module.css';
 
 /* eslint no-underscore-dangle: 0 */
-
-function GateWayList() {
+interface Props {
+  open: boolean;
+  close: () => void;
+}
+function GateWayList({ open, close }: Props) {
   const {
     gateways,
     setGateways,
@@ -31,6 +34,7 @@ function GateWayList() {
   const addNewGatewayHandler = () => {
     setIsGatewayAddMode(true);
     setIsPerEditMode(false);
+    close();
   };
 
   const gatewayViewClickHandler = async (
@@ -49,6 +53,7 @@ function GateWayList() {
       setGateway(res.data);
       setPeripherals(res.data.peripherals);
       setIsPerEditMode(false);
+      close();
     }
   };
   const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
@@ -57,7 +62,7 @@ function GateWayList() {
     }
   };
   return (
-    <div className={styles.gatewayStack}>
+    <div className={`${styles.gatewayStack} ${open ? styles.show : ''}`}>
       <button
         type="button"
         className={styles.btnAdd}
