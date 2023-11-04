@@ -20,16 +20,33 @@ function GateWayList({ open, close }: Props) {
     setIsPerEditMode,
     addError,
   } = useAppContext();
-
   useEffect(() => {
     const setGatewaysList = async () => {
-      const res = await api.getGatways();
-      if (!res) return;
+      try {
+        const res = await api.getGatways();
+        if (!res) {
+          return;
+        }
 
-      setGateways(res.data);
+        setGateways(res.data);
+      } catch (error) {
+        if (error instanceof Error) {
+          addError(error.message);
+        }
+      }
     };
+
     setGatewaysList();
   }, []);
+  // useEffect(() => {
+  //   const setGatewaysList = async () => {
+  //     const res = await api.getGatways();
+  //     if (!res) return;
+
+  //     setGateways(res.data);
+  //   };
+  //   setGatewaysList();
+  // }, []);
 
   const addNewGatewayHandler = () => {
     setIsGatewayAddMode(true);

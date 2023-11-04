@@ -37,11 +37,13 @@ class Api implements GatewayDao, PeripheralDao {
   async getGatways(): Promise<GetGatewayRes | undefined> {
     try {
       const res = await fetch(`${this.URL}gateway`);
-
+      if (!res.ok) {
+        throw new Error('server is down');
+      }
       return await res.json();
     } catch (err) {
       if (err instanceof Error) {
-        throw err;
+        throw new Error('Failed to conect to the server');
       }
     }
     return undefined;

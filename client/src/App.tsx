@@ -11,7 +11,7 @@ function App() {
   const [isHovered, setIsHovered] = useState(false);
 
   const iconStyles = {
-    color: isHovered ? 'red' : 'blue', // Color based on hover state
+    color: isHovered ? 'red' : 'blue',
     transition: 'color 0.2s',
     left: '13rem',
     top: '1.6rem',
