@@ -1,48 +1,44 @@
-
 .gatewayStack {
   width: 250px;
   height: 100%;
   padding: 0.8rem;
-  background-color: #fff;
+  background-color: var(--color-white);
   position: fixed;
   left: -250px;
   z-index: 1;
   overflow-y: auto;
   transition: all 0.2s;
-
-
-  /* border-radius: 0.4rem; */
-  /* -webkit-box-shadow: -5px 0px 37px -7px rgba(0, 0, 0, 0.08); */
-  /* -moz-box-shadow: -5px 0px 37px -7px rgba(0, 0, 0, 0.08); */
-  /* box-shadow: -5px 0px 37px -7px rgba(0, 0, 0, 0.08); */
-}
-.show{
-
-  left: 0px;
-
 }
 .btnAdd {
-  display: inline-block;
-  padding: .5rem;
+  display: block;
+  padding: 0.5rem;
+  margin-top: 0.3rem;
   margin-bottom: 0.8rem;
   width: 60%;
-  background-color: #79c7c5;
-  color: #fff;
-  font-size: 1.1rem;
+  background-color: var(--color-green);
+  color: var(--color-black);
+  font-size: 1rem;
   border-radius: 0.4rem;
   border: none;
   outline: none;
   cursor: pointer;
+  transition: all 0.3s;
 }
-
+.btnAdd:hover {
+  background-color: var(--color-dark-green);
+  color: var(--color-white);
+}
 .gatewayName {
   border-radius: 0.3rem;
-  border: 1px solid #99d19c;
+  border: 1px solid var(--color-dark-green);
+  color: var(--color-black);
+  font-size: 1rem;
   width: 100%;
   padding: 0.8rem;
   margin: 0.8rem auto;
   display: flex;
   justify-content: space-between;
+  align-items: center;
   cursor: pointer;
 }
 
@@ -51,7 +47,9 @@
 }
 .gatewayCircle {
   width: 10%;
-  background-color: #79c7c5;
+  max-width: 20px;
+  background-color: var(--color-green);
+  color: var(--color-black);
   border-radius: 50%;
   line-height: 0;
   position: relative;
@@ -70,5 +68,19 @@
   text-align: center;
   font-size: 0.9rem;
 }
-
-
+.show {
+  left: 0;
+}
+@media (min-width: 1024px) {
+  .gatewayStack {
+    width: 25%;
+    height: 100%;
+    padding: 0.8rem;
+    background-color: var(--color-white);
+    position: static;
+  }
+  .gatewayStack .btnAdd {
+    margin: 2rem auto;
+    padding: 0.8rem;
+  }
+}

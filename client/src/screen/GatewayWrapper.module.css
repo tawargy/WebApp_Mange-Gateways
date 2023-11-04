@@ -1,8 +1,15 @@
 .gatewayWrapper {
   width: 100%;
   height: 100%;
- background: linear-gradient(to right, rgba(250, 250, 250, 0.7) , rgba(250, 250, 250, 0.3));
-
+  background: linear-gradient(
+    to right,
+    rgba(250, 250, 250, 0.7),
+    rgba(250, 250, 250, 0.3)
+  );
 }
 
-
+@media (min-width: 1024px) {
+  .gatewayWrapper {
+    width: 75%;
+  }
+}

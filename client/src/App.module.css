@@ -1,9 +1,10 @@
 :root {
   --color-black: #4c4a59;
   --color-dark-green: #1b7f7a;
-  --color-green: #4caba6;
-  --color-blue: #0897b4;
-  --color-offwhite: #f2cdac;
+  --color-green: #65dfc9;
+  --color-blue: #6cdbeb;
+  --color-grey: #777;
+  --color-white: #fff;
 }
 
 html {
@@ -19,48 +20,64 @@ html {
 
 body {
   font-family: 'Roboto', sans-serif;
-  background: linear-gradient(to right, #65dfc9, #6cdbeb);
+  background: linear-gradient(to right, var(--color-green), var(--color-blue));
 }
 .app {
   position: relative;
 }
 h1 {
   padding: 1rem;
-  margin-bottom: 2rem;
+  margin: 1.5rem;
   cursor: pointer;
   text-align: center;
   color: var(--color-dark-green);
   font-size: 1.5rem;
 }
-h1 a{
+h1 a {
   text-decoration: none;
-  color:inherit
+  color: inherit;
 }
 
 .appView {
   width: 100%;
   height: 100vh;
   position: relative;
-
 }
 .checkbox {
   display: none;
 }
-.checkboxLabel i:first-child {
- position: absolute;
+.checkboxLabel i {
+  position: absolute;
   left: 1rem;
   top: -2.3rem;
   font-size: 1.3rem;
   z-index: 999;
+  color: var(--color-grey);
 }
 
 .error {
   position: absolute;
   right: 1rem;
   top: 3rem;
-  padding: .8rem .4rem;
-
-
+  padding: 0.8rem 0.4rem;
   color: red;
   font-size: 1rem;
+}
+
+@media (min-width: 1024px) {
+  h1 {
+    font-size: 1.5rem;
+    text-align: left;
+  }
+  .error {
+    font-size: 1.4rem;
+  }
+  .checkboxLabel {
+    display: none;
+  }
+  .appView {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 }

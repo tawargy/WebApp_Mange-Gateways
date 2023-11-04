@@ -8,6 +8,14 @@ import styles from './App.module.css';
 function App() {
   const { error } = useAppContext();
   const [open, setOpen] = useState<boolean>(false);
+  const [isHovered, setIsHovered] = useState(false);
+
+  const iconStyles = {
+    color: isHovered ? 'red' : 'blue', // Color based on hover state
+    transition: 'color 0.2s',
+    left: '13rem',
+    top: '1.6rem',
+  };
 
   return (
     <div className={styles.app}>
@@ -24,7 +32,9 @@ function App() {
           {open ? (
             <i
               className="fas fa-times"
-              style={{ left: '13rem', top: '1.6rem' }}
+              style={iconStyles}
+              onMouseEnter={() => setIsHovered(true)}
+              onMouseLeave={() => setIsHovered(false)}
             />
           ) : (
             <i className="fas fa-bars " />

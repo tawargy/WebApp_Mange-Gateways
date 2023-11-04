@@ -4,11 +4,10 @@
   flex-direction: column;
 }
 .formGroup label {
-  color: #868b8e;
+  color: var(--color-black);
   display: block;
   width: 100%;
   font-size: 0.8rem;
-
 }
 .formGroup input {
   display: block;
@@ -16,40 +15,69 @@
   border-radius: 0.3rem;
   border: none;
   font-size: 1rem;
-  background-color: #f7f0e9;
+  background-color: var(--color-white);
   width: 100%;
   margin-bottom: 1rem;
+  outline: none;
 }
 
 .btnAdd {
   display: block;
-  padding: .3rem;
+  padding: 0.3rem;
   margin: auto;
   width: 30%;
-  background-color: #79c7c5;
-  color: #fff;
-  font-size: .9rem;
+  background-color: var(--color-green);
+  color: var(--color-black);
+  font-size: 0.9rem;
   border-radius: 0.4rem;
   border: none;
   outline: none;
   cursor: pointer;
+  transition: all 0.3s;
 }
 .btnAdd:hover {
   background: var(--color-dark-green);
+  color: var(--color-white);
 }
 .btnEdit {
   display: block;
-  padding: .3rem;
+  padding: 0.3rem;
   margin: auto;
   width: 30%;
-  background-color: #79c7c5;
-  color: #fff;
-  font-size: .9rem;
+  background-color: var(--color-green);
+  color: var(--color-black);
+  font-size: 0.9rem;
   border-radius: 0.4rem;
   border: none;
   outline: none;
   cursor: pointer;
+  transition: all 0.3s;
 }
 .btnEdit:hover {
   background: var(--color-dark-green);
+  color: var(--color-white);
+}
+
+@media (min-width: 1024px) {
+  .formGroup label {
+    width: 80%;
+    margin: 0.5rem auto;
+    font-size: 1rem;
+  }
+  .formGroup input {
+    padding: 0.5rem;
+    font-size: 1rem;
+    background-color: var(--color-white);
+    width: 90%;
+    margin: 1rem auto;
+  }
+  .btnEdit {
+    font-size: 1.2rem;
+    padding: 0.5rem;
+    margin: 1rem auto;
+  }
+  .btnAdd {
+    font-size: 1.2rem;
+    padding: 0.5rem;
+  }
 }

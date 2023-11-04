@@ -1,22 +1,24 @@
-th, td {
-    width: 100px; /* Set a fixed width for all cells */
-    height: 30px; /* Set a fixed height for all cells */
-  }
 .peripheralRowEdit input {
-  background-color: #f7f0e9;
-  font-size: .8rem;
-  padding: .3rem;
+  background-color: var(--color-white);
+  font-size: 0.8rem;
+  padding: 0.3rem;
   text-align: center;
-  width: 100%; 
+  width: 100%;
   outline: none;
   border: none;
 }
 .peripheralRowEdit .btnAdd {
   background-color: transparent;
-  color: #777;
+  color: var(--color-grey);
   font-size: 1rem;
   border: none;
 }
 .peripheralRowEdit .btnAdd:hover {
   color: blue;
+}
+
+@media (min-width: 1024px) {
+  .peripheralRowEdit input {
+    font-size: 1rem;
+  }
 }

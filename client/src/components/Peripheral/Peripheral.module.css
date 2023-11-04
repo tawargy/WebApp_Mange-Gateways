@@ -3,8 +3,9 @@
   position: relative;
 }
 
-.peripheralController .btnEdit,.peripheralController .btnDelete {
-  color: #777;
+.peripheralController .btnEdit,
+.peripheralController .btnDelete {
+  color: var(--color-grey);
   background-color: transparent;
   font-size: 1rem;
   border: none;
@@ -16,14 +17,21 @@
 .peripheralController .btnDelete:hover {
   color: red;
 }
-
-tbody td{
-  text-align:center;
-  font-size:0.8rem;
+th,
+td {
+  width: 100px;
+  height: 30px;
+  text-align: center;
+  font-size: 0.8rem;
+  color: var(--color-black);
 }
 
-tbody td:last-child{
-  text-align:right;
+tbody td:last-child {
+  text-align: right;
 }
 
-
+@media (min-width: 1024px) {
+  tbody tr td {
+    font-size: 1rem;
+  }
+}

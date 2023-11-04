@@ -1,67 +1,44 @@
-.gateway {
- 
-  border-radius: 0.4rem;
-  -webkit-box-shadow: -5px 0px 37px -7px rgba(0, 0, 0, 0.08);
-  -moz-box-shadow: -5px 0px 37px -7px rgba(0, 0, 0, 0.08);
-  box-shadow: -5px 0px 37px -7px rgba(0, 0, 0, 0.08);
-  /* position: relative; */
-
-}
-.gateway h3{
+.gateway h3 {
   font-size: 1rem;
-  font-weight: bold;
   text-align: center;
+  color: var(--color-black);
 }
 .gatewayController {
- position: absolute;
-
-
+  position: absolute;
   right: 0;
   top: 0;
-  padding: .5rem;
-
+  padding: 0.5rem;
 }
-/* .gatewayController::after { */
-/*   content: ""; */
-/*   display: table; */
-/*   clear: both; */
-  
-/* } */
- .gatewayController .btnEdit {
-  color: #777; 
+
+.gatewayController .btnEdit {
+  color: var(--color-grey);
   background-color: transparent;
   font-size: 1rem;
   margin-right: 0.5rem;
   border: none;
-
 }
 .gatewayController .btnEdit:hover {
   color: orange;
-  
 }
 .gatewayController .btnDelete {
-   color: #777; 
- background-color: transparent;
+  color: var(--color-grey);
+  background-color: transparent;
   font-size: 1rem;
   border: none;
-
 }
 .gatewayController .btnDelete:hover {
   color: red;
 }
 .gatewayInfo {
-
   display: flex;
   flex-direction: column;
 }
 
 .gatewayInfo span {
-  font-size: .9rem;
-  font-weight: bold;
+  font-size: 0.9rem;
   padding: 0.5rem;
+  color: var(--color-black);
 }
-
-
 
 .gatewayTable {
   width: 100%;
@@ -75,13 +52,22 @@
 .gatewayTable thead th {
   text-align: center;
   padding: 0.6rem;
-  color: #fff;
-  background-color: #2c7a78;
+  color: var(--color-white);
+  background-color: var(--color-dark-green);
 }
 .gatewayTable td {
   text-align: center;
-
   padding: 0.6rem;
 }
 
-
+@media (min-width: 1024px) {
+  .gateway {
+    padding: 1rem;
+  }
+  .gateway h3 {
+    font-size: 1.2rem;
+  }
+  .gatewayInfo span {
+    font-size: 1rem;
+  }
+}
